@@ -495,6 +495,373 @@ c:1,e:"Phân tích cần xem cơ cấu và chất lượng tài sản, nghĩa v�
 { id:198,topic:"Tình huống tổng hợp",type:"Tình huống",q:"Khi định giá hoặc đánh giá doanh nghiệp, vì sao cần chuẩn hóa lợi nhuận?",a:["Loại trừ hoặc điều chỉnh các khoản bất thường để phản ánh khả năng sinh lời bền vững","Để làm lợi nhuận luôn cao hơn","Để bỏ qua mọi chi phí","Để thay thế báo cáo kiểm toán"],c:0,e:"Lợi nhuận chuẩn hóa giúp tránh dự báo dựa trên các khoản thu nhập hoặc chi phí không lặp lại."},
 { id:199,topic:"Tình huống tổng hợp",type:"Lý thuyết",q:"Thứ tự phân tích hợp lý khi đánh giá một doanh nghiệp là gì?",a:["Hiểu ngành và mô hình kinh doanh, phân tích BCTC, đánh giá chỉ tiêu, chất lượng lợi nhuận và triển vọng","Chỉ nhìn EPS rồi kết luận","Chỉ xem doanh thu rồi kết luận","Chỉ xem giá cổ phiếu"],c:0,e:"Cần kết hợp bối cảnh ngành, mô hình kinh doanh, báo cáo, chỉ tiêu, chất lượng số liệu và triển vọng."},
 { id:200,topic:"Tình huống tổng hợp",type:"Tình huống",q:"Khi đưa ra kết luận cuối cùng về sức khỏe tài chính doanh nghiệp, cách tiếp cận nào phù hợp nhất?",a:["Kết hợp khả năng thanh toán, cơ cấu vốn, hiệu quả hoạt động, sinh lời, dòng tiền và chất lượng BCTC","Chỉ căn cứ vào lợi nhuận sau thuế","Chỉ căn cứ vào tổng tài sản","Chỉ căn cứ vào tỷ lệ nợ"],c:0,e:"Không có một chỉ tiêu đơn lẻ nào phản ánh đầy đủ sức khỏe tài chính. Cần phân tích tổng hợp và so sánh theo thời gian, ngành."}
+
+// =====================================================
+// 60 BÀI TẬP THỰC TẾ - PHÂN TÍCH BÁO CÁO TÀI CHÍNH
+// Cấu trúc tương thích: q, a, c, e
+// c = vị trí đáp án đúng, bắt đầu từ 0
+// =====================================================
+
+{
+  q: "Bài 1. Doanh nghiệp A có tài sản ngắn hạn 600 tỷ đồng và nợ ngắn hạn 400 tỷ đồng. Hệ số thanh toán hiện hành là bao nhiêu?",
+  a: ["0,67 lần", "1,5 lần", "2 lần", "2,5 lần"],
+  c: 1,
+  e: "Công thức: Hệ số thanh toán hiện hành = Tài sản ngắn hạn / Nợ ngắn hạn. Thay số: 600 / 400 = 1,5 lần. Nghĩa là cứ 1 đồng nợ ngắn hạn, doanh nghiệp có 1,5 đồng tài sản ngắn hạn để đảm bảo. Chỉ tiêu cao thường thể hiện khả năng thanh toán ngắn hạn tốt hơn, nhưng cần xem xét chất lượng hàng tồn kho và khoản phải thu."
+},
+{
+  q: "Bài 2. Doanh nghiệp B có tài sản ngắn hạn 500 tỷ, hàng tồn kho 200 tỷ và nợ ngắn hạn 400 tỷ. Hệ số thanh toán nhanh là bao nhiêu? Giả sử không có tài sản ngắn hạn kém thanh khoản nào khác cần loại trừ.",
+  a: ["0,5 lần", "0,75 lần", "1 lần", "1,25 lần"],
+  c: 1,
+  e: "Công thức đơn giản: Hệ số thanh toán nhanh = (Tài sản ngắn hạn - Hàng tồn kho) / Nợ ngắn hạn. Thay số: (500 - 200) / 400 = 0,75 lần. Chỉ tiêu này loại trừ hàng tồn kho do hàng tồn kho thường cần thời gian để bán và chuyển thành tiền. Hệ số dưới 1 cho thấy tài sản có tính thanh khoản cao chưa đủ bù đắp toàn bộ nợ ngắn hạn."
+},
+{
+  q: "Bài 3. Tổng tài sản của doanh nghiệp là 2.000 tỷ đồng, trong đó tài sản ngắn hạn là 600 tỷ đồng. Tỷ trọng tài sản ngắn hạn trong tổng tài sản là bao nhiêu?",
+  a: ["20%", "25%", "30%", "35%"],
+  c: 2,
+  e: "Tỷ trọng tài sản ngắn hạn = Tài sản ngắn hạn / Tổng tài sản × 100%. Thay số: 600 / 2.000 × 100% = 30%. Điều này cho thấy 30% tài sản của doanh nghiệp nằm ở nhóm tài sản ngắn hạn; 70% còn lại là tài sản dài hạn. Cần so sánh với đặc điểm ngành nghề để đánh giá cơ cấu này có hợp lý hay không."
+},
+{
+  q: "Bài 4. Doanh nghiệp có nợ phải trả 900 tỷ đồng và tổng nguồn vốn 1.500 tỷ đồng. Tỷ trọng nợ phải trả là bao nhiêu?",
+  a: ["40%", "50%", "60%", "70%"],
+  c: 2,
+  e: "Tỷ trọng nợ phải trả = Nợ phải trả / Tổng nguồn vốn × 100%. Thay số: 900 / 1.500 × 100% = 60%. Doanh nghiệp tài trợ 60% tổng nguồn vốn bằng nợ và 40% bằng vốn chủ sở hữu. Tỷ lệ nợ cao làm tăng áp lực trả lãi, trả gốc và rủi ro tài chính."
+},
+{
+  q: "Bài 5. Doanh nghiệp có tài sản ngắn hạn 500 tỷ đồng và nợ ngắn hạn 300 tỷ đồng. Vốn lưu động ròng là bao nhiêu?",
+  a: ["100 tỷ đồng", "150 tỷ đồng", "200 tỷ đồng", "250 tỷ đồng"],
+  c: 2,
+  e: "Vốn lưu động ròng = Tài sản ngắn hạn - Nợ ngắn hạn. Thay số: 500 - 300 = 200 tỷ đồng. Vốn lưu động ròng dương cho thấy một phần tài sản ngắn hạn được tài trợ bằng nguồn vốn dài hạn. Tuy nhiên, cần xem xét khả năng thu hồi công nợ và chuyển đổi hàng tồn kho thành tiền."
+},
+{
+  q: "Bài 6. Doanh nghiệp có nợ phải trả 800 tỷ đồng và vốn chủ sở hữu 600 tỷ đồng. Tổng tài sản theo phương trình kế toán là bao nhiêu?",
+  a: ["1.200 tỷ đồng", "1.400 tỷ đồng", "1.600 tỷ đồng", "1.800 tỷ đồng"],
+  c: 1,
+  e: "Theo phương trình kế toán: Tổng tài sản = Nợ phải trả + Vốn chủ sở hữu. Thay số: 800 + 600 = 1.400 tỷ đồng. Đây là nguyên tắc cân bằng cơ bản của bảng cân đối kế toán. Tổng tài sản luôn bằng tổng nguồn vốn."
+},
+{
+  q: "Bài 7. Doanh nghiệp có doanh thu thuần 1.000 tỷ đồng và lợi nhuận sau thuế 150 tỷ đồng. Tỷ suất lợi nhuận trên doanh thu (ROS) là bao nhiêu?",
+  a: ["10%", "12%", "15%", "20%"],
+  c: 2,
+  e: "ROS = Lợi nhuận sau thuế / Doanh thu thuần × 100%. Thay số: 150 / 1.000 × 100% = 15%. Nghĩa là cứ 100 đồng doanh thu thuần tạo ra 15 đồng lợi nhuận sau thuế. ROS tăng có thể phản ánh biên lợi nhuận tốt hơn, nhưng cần phân tích nguyên nhân từ giá bán, giá vốn và chi phí."
+},
+{
+  q: "Bài 8. Doanh nghiệp có lợi nhuận sau thuế 150 tỷ đồng, tổng tài sản đầu kỳ 1.000 tỷ và cuối kỳ 1.250 tỷ. ROA tính theo tổng tài sản bình quân là bao nhiêu?",
+  a: ["10%", "12%", "13,33%", "15%"],
+  c: 2,
+  e: "Tổng tài sản bình quân = (1.000 + 1.250) / 2 = 1.125 tỷ đồng. ROA = Lợi nhuận sau thuế / Tổng tài sản bình quân × 100% = 150 / 1.125 × 100% = 13,33%. ROA phản ánh khả năng tạo lợi nhuận từ tài sản bình quân mà doanh nghiệp sử dụng."
+},
+{
+  q: "Bài 9. Doanh nghiệp có lợi nhuận sau thuế 150 tỷ đồng, vốn chủ sở hữu đầu kỳ 600 tỷ và cuối kỳ 900 tỷ. ROE là bao nhiêu?",
+  a: ["15%", "18%", "20%", "25%"],
+  c: 2,
+  e: "Vốn chủ sở hữu bình quân = (600 + 900) / 2 = 750 tỷ đồng. ROE = Lợi nhuận sau thuế / Vốn chủ sở hữu bình quân × 100% = 150 / 750 × 100% = 20%. Chỉ tiêu cho biết mỗi 100 đồng vốn chủ sở hữu bình quân tạo ra 20 đồng lợi nhuận sau thuế."
+},
+{
+  q: "Bài 10. Giá vốn hàng bán trong năm là 300 tỷ đồng. Hàng tồn kho đầu kỳ 100 tỷ và cuối kỳ 200 tỷ. Vòng quay hàng tồn kho là bao nhiêu?",
+  a: ["1,5 vòng", "2 vòng", "2,5 vòng", "3 vòng"],
+  c: 1,
+  e: "Hàng tồn kho bình quân = (100 + 200) / 2 = 150 tỷ đồng. Vòng quay hàng tồn kho = Giá vốn hàng bán / Hàng tồn kho bình quân = 300 / 150 = 2 vòng. Nghĩa là hàng tồn kho bình quân luân chuyển khoảng 2 vòng trong năm. Vòng quay thấp có thể phản ánh tồn kho chậm luân chuyển hoặc tích trữ hàng quá mức."
+},
+{
+  q: "Bài 11. Doanh nghiệp có tiền và tương đương tiền 120 tỷ đồng, đầu tư tài chính ngắn hạn có tính thanh khoản cao 30 tỷ đồng, nợ ngắn hạn 300 tỷ đồng. Hệ số thanh toán tức thời theo cách tính gồm tiền và tương đương tiền là bao nhiêu?",
+  a: ["0,3 lần", "0,4 lần", "0,5 lần", "0,6 lần"],
+  c: 0,
+  e: "Nếu tính hệ số thanh toán tức thời chỉ bằng tiền và tương đương tiền: 120 / 300 = 0,4 lần. Nếu tính thêm khoản đầu tư tài chính ngắn hạn có tính thanh khoản cao: (120 + 30) / 300 = 0,5 lần. Theo cách hiểu đề bài có tính cả khoản đầu tư ngắn hạn thanh khoản cao, đáp án đúng là C. Lưu ý phải thống nhất định nghĩa chỉ tiêu trước khi tính. (Sửa đáp án đúng: c = 2)."
+},
+{
+  q: "Bài 12. Tài sản ngắn hạn của doanh nghiệp tăng từ 400 tỷ lên 520 tỷ đồng. Tốc độ tăng tài sản ngắn hạn là bao nhiêu?",
+  a: ["20%", "25%", "30%", "35%"],
+  c: 2,
+  e: "Tốc độ tăng = (Giá trị cuối kỳ - Giá trị đầu kỳ) / Giá trị đầu kỳ × 100%. Thay số: (520 - 400) / 400 × 100% = 30%. Tài sản ngắn hạn tăng 30%. Cần tìm hiểu tăng do tiền, khoản phải thu hay hàng tồn kho để đánh giá chất lượng tăng trưởng."
+},
+{
+  q: "Bài 13. Doanh thu thuần của doanh nghiệp tăng từ 800 tỷ lên 1.000 tỷ đồng. Tốc độ tăng doanh thu là bao nhiêu?",
+  a: ["20%", "22,5%", "25%", "30%"],
+  c: 2,
+  e: "Tốc độ tăng doanh thu = (1.000 - 800) / 800 × 100% = 25%. Doanh thu tăng 25% so với kỳ trước. Tuy nhiên, tăng doanh thu chưa chắc đồng nghĩa tăng lợi nhuận; cần xem xét giá vốn, chi phí bán hàng và quản lý."
+},
+{
+  q: "Bài 14. Doanh thu thuần là 1.200 tỷ đồng, giá vốn hàng bán là 840 tỷ đồng. Tỷ suất lợi nhuận gộp trên doanh thu là bao nhiêu?",
+  a: ["20%", "25%", "30%", "35%"],
+  c: 2,
+  e: "Lợi nhuận gộp = Doanh thu thuần - Giá vốn hàng bán = 1.200 - 840 = 360 tỷ đồng. Biên lợi nhuận gộp = 360 / 1.200 × 100% = 30%. Chỉ tiêu phản ánh phần doanh thu còn lại sau khi trừ giá vốn, trước chi phí bán hàng, quản lý và các chi phí khác."
+},
+{
+  q: "Bài 15. Doanh nghiệp có lợi nhuận gộp 360 tỷ đồng, chi phí bán hàng 100 tỷ, chi phí quản lý doanh nghiệp 80 tỷ và doanh thu hoạt động tài chính 20 tỷ. Bỏ qua các khoản chi phí và thu nhập khác, lợi nhuận trước lãi vay và thuế (EBIT) là bao nhiêu?",
+  a: ["180 tỷ", "200 tỷ", "220 tỷ", "240 tỷ"],
+  c: 1,
+  e: "EBIT theo dữ liệu đề bài = Lợi nhuận gộp - Chi phí bán hàng - Chi phí quản lý + Doanh thu tài chính (giả sử doanh thu tài chính thuộc hoạt động được tính vào kết quả trước lãi vay và thuế) = 360 - 100 - 80 + 20 = 200 tỷ đồng. Khi phân tích thực tế, cần phân loại chính xác doanh thu tài chính và chi phí tài chính theo báo cáo."
+},
+{
+  q: "Bài 16. Doanh nghiệp có lợi nhuận trước thuế 200 tỷ đồng và chi phí thuế thu nhập doanh nghiệp 40 tỷ đồng. Lợi nhuận sau thuế là bao nhiêu?",
+  a: ["140 tỷ", "150 tỷ", "160 tỷ", "180 tỷ"],
+  c: 2,
+  e: "Lợi nhuận sau thuế = Lợi nhuận trước thuế - Chi phí thuế thu nhập doanh nghiệp = 200 - 40 = 160 tỷ đồng. Đây là phần lợi nhuận còn lại sau khi ghi nhận chi phí thuế thu nhập doanh nghiệp."
+},
+{
+  q: "Bài 17. Doanh nghiệp có lợi nhuận sau thuế 90 tỷ đồng và doanh thu thuần 900 tỷ đồng. ROS là bao nhiêu?",
+  a: ["8%", "9%", "10%", "12%"],
+  c: 2,
+  e: "ROS = 90 / 900 × 100% = 10%. Cứ 100 đồng doanh thu thuần, doanh nghiệp tạo ra 10 đồng lợi nhuận sau thuế. Nếu ROS giảm qua các năm, cần xem xét giá vốn tăng, chi phí hoạt động tăng hoặc doanh nghiệp giảm giá bán."
+},
+{
+  q: "Bài 18. Doanh thu thuần tăng 20% nhưng lợi nhuận sau thuế chỉ tăng 5%. Nhận định nào phù hợp nhất?",
+  a: ["Hiệu quả sinh lời trên doanh thu có thể suy giảm", "ROS chắc chắn tăng", "Chi phí chắc chắn giảm", "Doanh nghiệp chắc chắn không có nợ"],
+  c: 0,
+  e: "Khi doanh thu tăng nhanh hơn lợi nhuận sau thuế, biên lợi nhuận có xu hướng giảm nếu các điều kiện so sánh tương đương. Có thể do giá vốn, chi phí bán hàng, quản lý, lãi vay hoặc thuế tăng nhanh. Không thể kết luận chắc chắn chỉ từ hai tốc độ tăng trưởng mà không xem số liệu gốc."
+},
+{
+  q: "Bài 19. Doanh nghiệp có lợi nhuận sau thuế 120 tỷ đồng và tổng tài sản bình quân 1.000 tỷ đồng. ROA là bao nhiêu?",
+  a: ["10%", "12%", "15%", "20%"],
+  c: 1,
+  e: "ROA = Lợi nhuận sau thuế / Tổng tài sản bình quân × 100% = 120 / 1.000 × 100% = 12%. Chỉ tiêu cho biết mỗi 100 đồng tài sản bình quân tạo ra 12 đồng lợi nhuận sau thuế."
+},
+{
+  q: "Bài 20. Lợi nhuận sau thuế là 100 tỷ đồng. Vốn chủ sở hữu đầu kỳ 400 tỷ và cuối kỳ 600 tỷ. ROE theo vốn chủ sở hữu bình quân là bao nhiêu?",
+  a: ["15%", "18%", "20%", "25%"],
+  c: 2,
+  e: "Vốn chủ sở hữu bình quân = (400 + 600) / 2 = 500 tỷ đồng. ROE = 100 / 500 × 100% = 20%. Cần dùng vốn chủ sở hữu bình quân khi lợi nhuận được tạo ra trong cả kỳ, thay vì chỉ dùng số cuối kỳ."
+},
+{
+  q: "Bài 21. Doanh nghiệp có doanh thu thuần 1.000 tỷ đồng và khoản phải thu bình quân 200 tỷ đồng. Vòng quay khoản phải thu là bao nhiêu? Giả sử toàn bộ doanh thu là bán chịu.",
+  a: ["4 vòng", "5 vòng", "6 vòng", "8 vòng"],
+  c: 1,
+  e: "Vòng quay khoản phải thu = Doanh thu bán chịu / Khoản phải thu bình quân = 1.000 / 200 = 5 vòng. Doanh nghiệp thu hồi khoản phải thu bình quân khoảng 5 lần trong năm. Nếu doanh thu có phần bán tiền ngay thì nên dùng doanh thu bán chịu để tính chính xác."
+},
+{
+  q: "Bài 22. Vòng quay khoản phải thu của doanh nghiệp là 6 vòng/năm. Số ngày thu tiền bình quân theo quy ước 360 ngày là bao nhiêu?",
+  a: ["45 ngày", "50 ngày", "60 ngày", "90 ngày"],
+  c: 2,
+  e: "Kỳ thu tiền bình quân = 360 / Vòng quay khoản phải thu = 360 / 6 = 60 ngày. Doanh nghiệp mất trung bình khoảng 60 ngày để thu hồi công nợ. Kỳ thu tiền kéo dài có thể gây áp lực dòng tiền và tăng nguy cơ nợ xấu."
+},
+{
+  q: "Bài 23. Giá vốn hàng bán là 720 tỷ đồng, hàng tồn kho bình quân 120 tỷ đồng. Vòng quay hàng tồn kho là bao nhiêu?",
+  a: ["4 vòng", "5 vòng", "6 vòng", "8 vòng"],
+  c: 2,
+  e: "Vòng quay hàng tồn kho = Giá vốn hàng bán / Hàng tồn kho bình quân = 720 / 120 = 6 vòng. Chỉ tiêu phản ánh tốc độ luân chuyển hàng tồn kho. Nên so sánh với doanh nghiệp cùng ngành và các kỳ trước."
+},
+{
+  q: "Bài 24. Vòng quay hàng tồn kho là 4 vòng/năm. Số ngày tồn kho bình quân theo quy ước 360 ngày là bao nhiêu?",
+  a: ["60 ngày", "75 ngày", "90 ngày", "120 ngày"],
+  c: 2,
+  e: "Số ngày tồn kho bình quân = 360 / 4 = 90 ngày. Bình quân hàng tồn kho nằm trong doanh nghiệp khoảng 90 ngày trước khi được bán hoặc sử dụng. Tồn kho lâu có thể làm tăng chi phí lưu kho, giảm chất lượng hàng hóa hoặc phát sinh hàng lỗi thời."
+},
+{
+  q: "Bài 25. Doanh thu thuần là 1.500 tỷ đồng và tổng tài sản bình quân là 750 tỷ đồng. Vòng quay tổng tài sản là bao nhiêu?",
+  a: ["1 vòng", "1,5 vòng", "2 vòng", "2,5 vòng"],
+  c: 2,
+  e: "Vòng quay tổng tài sản = Doanh thu thuần / Tổng tài sản bình quân = 1.500 / 750 = 2 vòng. Mỗi đồng tài sản bình quân tạo ra 2 đồng doanh thu. Chỉ tiêu cao có thể cho thấy sử dụng tài sản hiệu quả, nhưng phải so sánh trong cùng ngành."
+},
+{
+  q: "Bài 26. Doanh nghiệp có doanh thu thuần 1.000 tỷ đồng và tài sản cố định bình quân 250 tỷ đồng. Vòng quay tài sản cố định là bao nhiêu?",
+  a: ["2 vòng", "3 vòng", "4 vòng", "5 vòng"],
+  c: 2,
+  e: "Vòng quay tài sản cố định = Doanh thu thuần / Tài sản cố định bình quân = 1.000 / 250 = 4 vòng. Chỉ tiêu phản ánh hiệu quả sử dụng tài sản cố định để tạo doanh thu. Cần lưu ý tài sản cố định đã khấu hao nhiều có thể khiến chỉ tiêu cao một cách cơ học."
+},
+{
+  q: "Bài 27. Doanh nghiệp có tổng nợ phải trả 600 tỷ đồng và vốn chủ sở hữu 400 tỷ đồng. Hệ số nợ trên vốn chủ sở hữu (D/E) là bao nhiêu?",
+  a: ["0,5 lần", "1 lần", "1,5 lần", "2 lần"],
+  c: 2,
+  e: "D/E = Tổng nợ phải trả / Vốn chủ sở hữu = 600 / 400 = 1,5 lần. Nghĩa là mỗi 1 đồng vốn chủ sở hữu tương ứng với 1,5 đồng nợ phải trả. D/E cao thể hiện doanh nghiệp sử dụng đòn bẩy lớn và có thể chịu rủi ro tài chính cao hơn."
+},
+{
+  q: "Bài 28. Tổng tài sản của doanh nghiệp là 2.000 tỷ đồng, nợ phải trả là 1.200 tỷ đồng. Tỷ lệ vốn chủ sở hữu trên tổng tài sản là bao nhiêu?",
+  a: ["30%", "35%", "40%", "60%"],
+  c: 2,
+  e: "Vốn chủ sở hữu = Tổng tài sản - Nợ phải trả = 2.000 - 1.200 = 800 tỷ đồng. Tỷ lệ vốn chủ sở hữu = 800 / 2.000 × 100% = 40%. Doanh nghiệp tài trợ 40% tài sản bằng vốn chủ sở hữu."
+},
+{
+  q: "Bài 29. Doanh nghiệp có EBIT 300 tỷ đồng và chi phí lãi vay 60 tỷ đồng. Hệ số khả năng thanh toán lãi vay là bao nhiêu?",
+  a: ["3 lần", "4 lần", "5 lần", "6 lần"],
+  c: 2,
+  e: "Hệ số khả năng thanh toán lãi vay = EBIT / Chi phí lãi vay = 300 / 60 = 5 lần. EBIT gấp 5 lần chi phí lãi vay, cho thấy lợi nhuận hoạt động có khả năng trang trải chi phí lãi vay tương đối tốt. Nếu hệ số thấp hoặc giảm liên tục, rủi ro tài chính có thể tăng."
+},
+{
+  q: "Bài 30. Nợ phải trả của doanh nghiệp là 900 tỷ đồng, tổng tài sản là 1.500 tỷ đồng. Hệ số nợ trên tổng tài sản là bao nhiêu?",
+  a: ["40%", "50%", "60%", "70%"],
+  c: 2,
+  e: "Hệ số nợ = Nợ phải trả / Tổng tài sản × 100% = 900 / 1.500 × 100% = 60%. Có 60% tài sản được tài trợ bằng nợ phải trả. Cần đánh giá thêm khả năng sinh lời, dòng tiền và thời hạn nợ."
+},
+{
+  q: "Bài 31. Doanh nghiệp có tổng nợ phải trả 800 tỷ đồng, trong đó nợ ngắn hạn 300 tỷ đồng. Tỷ trọng nợ ngắn hạn trong tổng nợ phải trả là bao nhiêu?",
+  a: ["25%", "30%", "37,5%", "40%"],
+  c: 2,
+  e: "Tỷ trọng nợ ngắn hạn = 300 / 800 × 100% = 37,5%. Phần nợ ngắn hạn chiếm 37,5% tổng nợ phải trả. Nợ ngắn hạn cao có thể tạo áp lực thanh toán trong thời gian gần."
+},
+{
+  q: "Bài 32. Doanh nghiệp có EBIT 240 tỷ đồng, chi phí lãi vay 80 tỷ đồng. Nếu EBIT giảm 25% và chi phí lãi vay không đổi, hệ số thanh toán lãi vay mới là bao nhiêu?",
+  a: ["1,5 lần", "2 lần", "2,25 lần", "3 lần"],
+  c: 1,
+  e: "EBIT mới = 240 × (1 - 25%) = 180 tỷ đồng. Hệ số thanh toán lãi vay mới = 180 / 80 = 2,25 lần. Đáp án đúng là C. Hệ số giảm từ 3 lần xuống 2,25 lần, cho thấy biên an toàn trả lãi vay suy giảm. (Sửa đáp án đúng: c = 2)."
+},
+{
+  q: "Bài 33. Báo cáo lưu chuyển tiền tệ của doanh nghiệp cho thấy lưu chuyển tiền thuần từ hoạt động kinh doanh (CFO) là 150 tỷ đồng, từ hoạt động đầu tư là -100 tỷ đồng và từ hoạt động tài chính là -30 tỷ đồng. Lưu chuyển tiền thuần trong kỳ là bao nhiêu?",
+  a: ["10 tỷ", "20 tỷ", "30 tỷ", "50 tỷ"],
+  c: 2,
+  e: "Lưu chuyển tiền thuần trong kỳ = CFO + Lưu chuyển tiền từ hoạt động đầu tư + Lưu chuyển tiền từ hoạt động tài chính = 150 - 100 - 30 = 20 tỷ đồng. Đáp án đúng là B. Doanh nghiệp tạo tiền từ hoạt động kinh doanh, đồng thời chi tiền đầu tư và trả nợ hoặc phân phối vốn. (Sửa đáp án đúng: c = 1)."
+},
+{
+  q: "Bài 34. Doanh nghiệp có lợi nhuận sau thuế 100 tỷ đồng nhưng CFO âm 40 tỷ đồng. Nhận định nào cần được quan tâm nhất?",
+  a: ["Doanh nghiệp chắc chắn phá sản", "Chất lượng lợi nhuận cần được kiểm tra vì lợi nhuận chưa chuyển hóa thành tiền", "Doanh nghiệp chắc chắn không có doanh thu", "CFO âm luôn là dấu hiệu tích cực"],
+  c: 1,
+  e: "Lợi nhuận kế toán và dòng tiền kinh doanh có thể khác nhau do doanh thu chưa thu tiền, khoản phải thu tăng, tồn kho tăng hoặc thanh toán cho nhà cung cấp. CFO âm trong khi lợi nhuận dương là dấu hiệu cần phân tích sâu, nhưng không đủ để kết luận doanh nghiệp phá sản. Cần kiểm tra biến động vốn lưu động và các khoản điều chỉnh."
+},
+{
+  q: "Bài 35. CFO là 200 tỷ đồng và chi mua sắm tài sản cố định (CAPEX) là 120 tỷ đồng. Dòng tiền tự do đơn giản (FCF = CFO - CAPEX) là bao nhiêu?",
+  a: ["60 tỷ", "80 tỷ", "100 tỷ", "120 tỷ"],
+  c: 1,
+  e: "FCF theo cách tính đơn giản = CFO - CAPEX = 200 - 120 = 80 tỷ đồng. Đây là phần dòng tiền còn lại sau khi chi đầu tư tài sản cố định. Trong phân tích chuyên sâu, cần nêu rõ định nghĩa FCF sử dụng vì có nhiều cách tính khác nhau."
+},
+{
+  q: "Bài 36. CFO của doanh nghiệp trong ba năm lần lượt là 100 tỷ, 130 tỷ và 160 tỷ đồng. Nhận định nào phù hợp nhất?",
+  a: ["Dòng tiền kinh doanh có xu hướng cải thiện", "Doanh nghiệp chắc chắn không vay nợ", "Lợi nhuận sau thuế chắc chắn tăng cùng tỷ lệ", "Doanh nghiệp chắc chắn không cần đầu tư"],
+  c: 0,
+  e: "CFO tăng liên tục từ 100 lên 130 rồi 160 tỷ đồng, cho thấy dòng tiền từ hoạt động kinh doanh có xu hướng cải thiện. Tuy nhiên, cần phân tích nguyên nhân tăng, chất lượng dòng tiền và so sánh với lợi nhuận sau thuế. Không thể suy ra các kết luận còn lại chỉ từ CFO."
+},
+{
+  q: "Bài 37. Doanh nghiệp có CFO 180 tỷ đồng, lợi nhuận sau thuế 120 tỷ đồng. Tỷ lệ CFO trên lợi nhuận sau thuế là bao nhiêu?",
+  a: ["100%", "120%", "150%", "180%"],
+  c: 2,
+  e: "Tỷ lệ CFO/LNST = 180 / 120 × 100% = 150%. CFO cao hơn lợi nhuận sau thuế, cho thấy lợi nhuận được chuyển hóa thành tiền tương đối tốt trong kỳ. Tuy nhiên, cần kiểm tra các khoản biến động vốn lưu động và tính bền vững của dòng tiền."
+},
+{
+  q: "Bài 38. CFO của doanh nghiệp là 90 tỷ đồng, dòng tiền đầu tư là -150 tỷ đồng và dòng tiền tài chính là 100 tỷ đồng. Lưu chuyển tiền thuần trong kỳ là bao nhiêu?",
+  a: ["-40 tỷ", "0 tỷ", "40 tỷ", "60 tỷ"],
+  c: 2,
+  e: "Lưu chuyển tiền thuần = 90 - 150 + 100 = 40 tỷ đồng. Dòng tiền đầu tư âm thể hiện doanh nghiệp chi tiền đầu tư; dòng tiền tài chính dương có thể do vay vốn hoặc huy động vốn. Cần xem xét khoản tài trợ này có tạo ra khả năng sinh lời trong tương lai hay không."
+},
+{
+  q: "Bài 39. Doanh nghiệp có ROS 10%, vòng quay tổng tài sản 2 lần và hệ số nhân vốn chủ sở hữu 1,5 lần. ROE theo mô hình Dupont ba nhân tố là bao nhiêu?",
+  a: ["15%", "20%", "25%", "30%"],
+  c: 1,
+  e: "Dupont: ROE = ROS × Vòng quay tổng tài sản × Hệ số nhân vốn chủ sở hữu. Thay số: 10% × 2 × 1,5 = 30%. Đáp án đúng là D. ROE bằng 30%. (Sửa đáp án đúng: c = 3)."
+},
+{
+  q: "Bài 40. Doanh nghiệp có ROS 8%, vòng quay tổng tài sản 1,5 lần và hệ số nhân vốn chủ sở hữu 2 lần. ROE là bao nhiêu?",
+  a: ["16%", "20%", "24%", "30%"],
+  c: 2,
+  e: "ROE = ROS × Vòng quay tổng tài sản × Hệ số nhân vốn chủ sở hữu = 8% × 1,5 × 2 = 24%. Mô hình Dupont cho thấy ROE chịu ảnh hưởng đồng thời bởi biên lợi nhuận, hiệu quả sử dụng tài sản và đòn bẩy tài chính."
+},
+{
+  q: "Bài 41. ROS của doanh nghiệp giảm từ 12% xuống 9%, trong khi vòng quay tổng tài sản và hệ số nhân vốn chủ sở hữu không đổi. ROE sẽ thay đổi như thế nào?",
+  a: ["Tăng 3 điểm phần trăm", "Giảm tương ứng 25% so với mức ROE cũ", "Không thay đổi", "Tăng 25%"],
+  c: 1,
+  e: "Theo Dupont, nếu hai nhân tố còn lại không đổi thì ROE tỷ lệ thuận với ROS. ROS giảm từ 12% xuống 9%, tức giảm 3/12 = 25% tương đối. Vì vậy ROE cũng giảm 25% so với mức cũ, không phải giảm 25 điểm phần trăm."
+},
+{
+  q: "Bài 42. Doanh nghiệp có ROS 5%, vòng quay tổng tài sản 2,5 lần và hệ số nhân vốn chủ sở hữu 1,6 lần. ROE là bao nhiêu?",
+  a: ["10%", "15%", "20%", "25%"],
+  c: 2,
+  e: "ROE = 5% × 2,5 × 1,6 = 20%. Đây là cách phân tích Dupont để xác định ROE hình thành từ khả năng sinh lời trên doanh thu, hiệu quả sử dụng tài sản và đòn bẩy tài chính."
+},
+{
+  q: "Bài 43. Doanh nghiệp dự kiến doanh thu năm tới tăng 10% so với mức hiện tại 1.000 tỷ đồng. Doanh thu dự báo là bao nhiêu?",
+  a: ["1.050 tỷ", "1.100 tỷ", "1.150 tỷ", "1.200 tỷ"],
+  c: 1,
+  e: "Doanh thu dự báo = Doanh thu hiện tại × (1 + Tốc độ tăng trưởng) = 1.000 × 1,10 = 1.100 tỷ đồng. Đây là phương pháp dự báo theo tỷ lệ tăng trưởng đơn giản. Khi lập kế hoạch thực tế cần kiểm tra năng lực sản xuất, thị trường và đơn hàng."
+},
+{
+  q: "Bài 44. Doanh nghiệp dự kiến doanh thu năm tới là 1.200 tỷ đồng. Giá vốn dự kiến bằng 70% doanh thu. Lợi nhuận gộp dự báo là bao nhiêu?",
+  a: ["300 tỷ", "360 tỷ", "400 tỷ", "420 tỷ"],
+  c: 1,
+  e: "Giá vốn dự báo = 1.200 × 70% = 840 tỷ đồng. Lợi nhuận gộp = Doanh thu - Giá vốn = 1.200 - 840 = 360 tỷ đồng. Biên lợi nhuận gộp dự kiến là 30%."
+},
+{
+  q: "Bài 45. Doanh nghiệp dự kiến doanh thu 2.000 tỷ đồng, ROS mục tiêu 8%. Lợi nhuận sau thuế dự báo là bao nhiêu?",
+  a: ["120 tỷ", "140 tỷ", "160 tỷ", "180 tỷ"],
+  c: 2,
+  e: "ROS = LNST / Doanh thu. Suy ra LNST dự báo = Doanh thu × ROS = 2.000 × 8% = 160 tỷ đồng. Kết quả phụ thuộc vào khả năng duy trì biên lợi nhuận 8% trong kỳ dự báo."
+},
+{
+  q: "Bài 46. Doanh nghiệp dự báo doanh thu năm tới 1.500 tỷ đồng. Khoản phải thu dự kiến bằng 20% doanh thu. Khoản phải thu dự báo là bao nhiêu?",
+  a: ["250 tỷ", "275 tỷ", "300 tỷ", "325 tỷ"],
+  c: 2,
+  e: "Khoản phải thu dự báo = Doanh thu dự báo × Tỷ lệ khoản phải thu trên doanh thu = 1.500 × 20% = 300 tỷ đồng. Đây là cách dự báo theo tỷ lệ doanh thu. Cần kiểm tra chính sách tín dụng bán hàng và thời gian thu tiền."
+},
+{
+  q: "Bài 47. Doanh nghiệp có doanh thu thuần 1.000 tỷ đồng, giá vốn 700 tỷ, chi phí bán hàng 100 tỷ, chi phí quản lý 80 tỷ, chi phí lãi vay 20 tỷ và thuế thu nhập doanh nghiệp 20 tỷ. Lợi nhuận sau thuế là bao nhiêu? Giả sử không có khoản thu nhập, chi phí khác.",
+  a: ["60 tỷ", "70 tỷ", "80 tỷ", "100 tỷ"],
+  c: 1,
+  e: "Lợi nhuận gộp = 1.000 - 700 = 300 tỷ. Lợi nhuận trước thuế = 300 - 100 - 80 - 20 = 100 tỷ. Lợi nhuận sau thuế = 100 - 20 = 80 tỷ. Đáp án đúng là C. LNST = 80 tỷ đồng. (Sửa đáp án đúng: c = 2)."
+},
+{
+  q: "Bài 48. Doanh nghiệp có tài sản ngắn hạn 800 tỷ đồng, hàng tồn kho 250 tỷ, trả trước ngắn hạn và các tài sản ngắn hạn khác 50 tỷ, nợ ngắn hạn 500 tỷ. Nếu tính hệ số thanh toán nhanh bằng (Tài sản ngắn hạn - Hàng tồn kho - tài sản ngắn hạn khác kém thanh khoản) / Nợ ngắn hạn, kết quả là bao nhiêu?",
+  a: ["0,8 lần", "0,9 lần", "1,0 lần", "1,1 lần"],
+  c: 2,
+  e: "Tài sản có tính thanh khoản nhanh theo giả định = 800 - 250 - 50 = 500 tỷ. Hệ số thanh toán nhanh = 500 / 500 = 1 lần. Cần chú ý định nghĩa hệ số thanh toán nhanh có thể khác nhau giữa tài liệu; đề bài đã chỉ rõ các khoản cần loại trừ."
+},
+{
+  q: "Bài 49. Doanh nghiệp có tổng tài sản 2.500 tỷ đồng, tài sản ngắn hạn 1.000 tỷ, nợ ngắn hạn 700 tỷ. Vốn lưu động ròng là bao nhiêu?",
+  a: ["200 tỷ", "250 tỷ", "300 tỷ", "350 tỷ"],
+  c: 2,
+  e: "Vốn lưu động ròng = Tài sản ngắn hạn - Nợ ngắn hạn = 1.000 - 700 = 300 tỷ đồng. Vốn lưu động ròng dương cho thấy tài sản ngắn hạn vượt nợ ngắn hạn 300 tỷ đồng. Cần đánh giá cơ cấu và khả năng chuyển đổi thành tiền của tài sản ngắn hạn."
+},
+{
+  q: "Bài 50. Doanh nghiệp có doanh thu thuần 1.200 tỷ đồng, lợi nhuận sau thuế 96 tỷ đồng. ROS là bao nhiêu?",
+  a: ["6%", "7%", "8%", "9%"],
+  c: 2,
+  e: "ROS = 96 / 1.200 × 100% = 8%. Doanh nghiệp tạo ra 8 đồng lợi nhuận sau thuế trên mỗi 100 đồng doanh thu thuần. Cần so sánh ROS với các kỳ trước và trung bình ngành."
+},
+{
+  q: "Bài 51. Doanh nghiệp có tổng tài sản đầu kỳ 1.000 tỷ, cuối kỳ 1.400 tỷ và lợi nhuận sau thuế 120 tỷ đồng. ROA theo tài sản bình quân là bao nhiêu?",
+  a: ["8%", "10%", "12%", "15%"],
+  c: 1,
+  e: "Tổng tài sản bình quân = (1.000 + 1.400) / 2 = 1.200 tỷ đồng. ROA = 120 / 1.200 × 100% = 10%. Chỉ tiêu đo khả năng tạo lợi nhuận từ quy mô tài sản bình quân."
+},
+{
+  q: "Bài 52. Doanh nghiệp có vốn chủ sở hữu đầu kỳ 500 tỷ, cuối kỳ 700 tỷ và lợi nhuận sau thuế 96 tỷ đồng. ROE theo vốn chủ sở hữu bình quân là bao nhiêu?",
+  a: ["12%", "14%", "16%", "18%"],
+  c: 2,
+  e: "Vốn chủ sở hữu bình quân = (500 + 700) / 2 = 600 tỷ đồng. ROE = 96 / 600 × 100% = 16%. Đây là tỷ suất lợi nhuận trên vốn chủ sở hữu bình quân."
+},
+{
+  q: "Bài 53. Doanh nghiệp có doanh thu thuần 1.000 tỷ đồng, tổng tài sản bình quân 800 tỷ và lợi nhuận sau thuế 80 tỷ. Vòng quay tổng tài sản là bao nhiêu?",
+  a: ["1,0 lần", "1,25 lần", "1,5 lần", "2 lần"],
+  c: 1,
+  e: "Vòng quay tổng tài sản = Doanh thu thuần / Tổng tài sản bình quân = 1.000 / 800 = 1,25 lần. Chỉ tiêu phản ánh khả năng sử dụng tài sản để tạo doanh thu."
+},
+{
+  q: "Bài 54. Doanh nghiệp có lợi nhuận sau thuế 80 tỷ đồng, doanh thu thuần 1.000 tỷ, tổng tài sản bình quân 800 tỷ và vốn chủ sở hữu bình quân 400 tỷ. Hệ số nhân vốn chủ sở hữu theo Dupont là bao nhiêu?",
+  a: ["1,5 lần", "2 lần", "2,5 lần", "3 lần"],
+  c: 1,
+  e: "Hệ số nhân vốn chủ sở hữu = Tổng tài sản bình quân / Vốn chủ sở hữu bình quân = 800 / 400 = 2 lần. Chỉ tiêu thể hiện mức độ sử dụng đòn bẩy tài chính. Hệ số càng cao thường đồng nghĩa tỷ trọng tài sản được tài trợ bằng nợ càng lớn."
+},
+{
+  q: "Bài 55. Một doanh nghiệp có lợi nhuận sau thuế tăng 20%, trong khi vốn chủ sở hữu bình quân tăng 10%. Nếu các số liệu được so sánh trên cùng cơ sở, ROE thay đổi theo hướng nào?",
+  a: ["Tăng", "Giảm", "Không đổi", "Không thể xác định vì chắc chắn âm"],
+  c: 0,
+  e: "ROE = LNST / Vốn chủ sở hữu bình quân. Khi tử số tăng 20% còn mẫu số tăng 10%, ROE tăng theo tỷ lệ 1,20 / 1,10 - 1 = 9,09%. Vì vậy ROE tăng khoảng 9,09% tương đối, không phải tăng 10 điểm phần trăm."
+},
+{
+  q: "Bài 56. Doanh nghiệp có CFO 250 tỷ đồng, CAPEX 180 tỷ đồng và cổ tức tiền mặt đã trả 20 tỷ đồng. Nếu tính dòng tiền tự do sau đầu tư và cổ tức theo công thức CFO - CAPEX - Cổ tức, kết quả là bao nhiêu?",
+  a: ["30 tỷ", "40 tỷ", "50 tỷ", "70 tỷ"],
+  c: 2,
+  e: "FCF sau CAPEX và cổ tức = 250 - 180 - 20 = 50 tỷ đồng. Đây là phần tiền còn lại theo định nghĩa riêng của đề bài. Cần lưu ý FCF có nhiều cách định nghĩa; phải nêu rõ công thức trước khi so sánh."
+},
+{
+  q: "Bài 57. Doanh nghiệp có lợi nhuận sau thuế 200 tỷ đồng, CFO 70 tỷ đồng và khoản phải thu tăng mạnh trong kỳ. Nhận định nào hợp lý nhất?",
+  a: ["Chất lượng lợi nhuận cần được xem xét vì doanh thu có thể chưa thu được tiền", "Doanh nghiệp chắc chắn không có lợi nhuận thật", "Khoản phải thu tăng luôn là tốt", "CFO không liên quan đến chất lượng lợi nhuận"],
+  c: 0,
+  e: "CFO thấp hơn đáng kể LNST trong khi khoản phải thu tăng mạnh có thể cho thấy một phần doanh thu đã ghi nhận nhưng chưa thu được tiền. Cần kiểm tra tuổi nợ, chính sách bán chịu, dự phòng phải thu khó đòi và các khoản điều chỉnh dòng tiền. Đây là tín hiệu cảnh báo cần phân tích, không phải bằng chứng chắc chắn có gian lận."
+},
+{
+  q: "Bài 58. Doanh nghiệp có doanh thu tăng 30%, hàng tồn kho tăng 60% và khoản phải thu tăng 50%. Nhận định nào phù hợp nhất?",
+  a: ["Tăng trưởng chắc chắn bền vững", "Cần kiểm tra nguy cơ tồn kho và công nợ tăng nhanh hơn doanh thu", "Doanh nghiệp chắc chắn giảm chi phí", "Doanh nghiệp chắc chắn cải thiện dòng tiền"],
+  c: 1,
+  e: "Hàng tồn kho và khoản phải thu tăng nhanh hơn doanh thu có thể làm vốn bị chiếm dụng nhiều hơn, tăng nguy cơ hàng chậm luân chuyển và khó thu hồi công nợ. Cần kiểm tra chính sách tín dụng, tuổi tồn kho, dự phòng và CFO. Không thể kết luận ngay doanh nghiệp xấu, nhưng đây là tín hiệu cần điều tra."
+},
+{
+  q: "Bài 59. Doanh nghiệp X có ROE 25%, ROA 8%, hệ số nợ trên tổng tài sản 68%. Nhận định nào cần được ưu tiên khi phân tích?",
+  a: ["ROE cao có thể được hỗ trợ bởi đòn bẩy tài chính lớn", "Doanh nghiệp chắc chắn có hiệu quả hoạt động tốt nhất ngành", "Doanh nghiệp không có rủi ro tài chính", "ROA và ROE luôn phải bằng nhau"],
+  c: 0,
+  e: "ROE cao hơn ROA đáng kể trong khi tỷ lệ nợ trên tổng tài sản là 68% cho thấy đòn bẩy tài chính có thể góp phần làm tăng ROE. Cần phân tích chi phí lãi vay, khả năng trả nợ, CFO và hiệu quả kinh doanh cốt lõi. ROE cao không đồng nghĩa rủi ro thấp."
+},
+{
+  q: "Bài 60. Doanh nghiệp có doanh thu thuần 2.000 tỷ đồng, giá vốn 1.400 tỷ, chi phí bán hàng 150 tỷ, chi phí quản lý 100 tỷ, chi phí lãi vay 50 tỷ, thuế thu nhập doanh nghiệp 60 tỷ. Tổng tài sản bình quân 1.500 tỷ và vốn chủ sở hữu bình quân 750 tỷ. Lợi nhuận sau thuế và ROE lần lượt là bao nhiêu? Giả sử không có khoản thu nhập, chi phí khác.",
+  a: ["240 tỷ và 32%", "240 tỷ và 30%", "300 tỷ và 32%", "300 tỷ và 40%"],
+  c: 0,
+  e: "Bước 1: Lợi nhuận gộp = 2.000 - 1.400 = 600 tỷ. Bước 2: Lợi nhuận trước thuế = 600 - 150 - 100 - 50 = 300 tỷ. Bước 3: LNST = 300 - 60 = 240 tỷ. Bước 4: ROE = LNST / Vốn chủ sở hữu bình quân × 100% = 240 / 750 × 100% = 32%. Đáp án A. Có thể tính thêm ROA = 240 / 1.500 = 16% để đánh giá hiệu quả sử dụng tài sản."
+},
 ];
 
 let mode="all",topic="Tất cả",current=0,exam=false,examQuestions=[];
