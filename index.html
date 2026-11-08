@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ôn thi Phân tích BCTC - 200 câu</title>
+<style>
+:root {
+  --bg:#f3f5f9;--panel:#fff;--nav:#142238;--primary:#2563eb;
+  --text:#182235;--muted:#64748b;--border:#e2e8f0;
+  --green:#15803d;--red:#dc2626;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:Arial,sans-serif}
+header{background:var(--nav);color:white;padding:22px 5%;
+display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+header h1{font-size:21px;margin:0 0 6px}
+header p{margin:0;color:#cbd5e1;font-size:13px}
+.container{max-width:1150px;margin:24px auto;padding:0 16px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.stat,.panel,.question{background:white;border:1px solid var(--border);
+border-radius:12px;padding:17px}
+.stat small{color:var(--muted)}
+.stat strong{display:block;font-size:25px;margin-top:7px}
+.layout{display:grid;grid-template-columns:250px 1fr;gap:18px}
+.sidebar{height:max-content}
+.sidebar button,.action{width:100%;border:0;border-radius:8px;padding:11px;
+margin:4px 0;text-align:left;background:#f1f5f9;color:var(--text);
+cursor:pointer;font-size:14px}
+.sidebar button.active,.action.primary{background:var(--primary);color:white}
+.action{width:auto;text-align:center;padding:10px 15px}
+select,input{padding:10px;border:1px solid var(--border);border-radius:8px;
+background:white;color:var(--text)}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.question{margin-bottom:14px}
+.qtop{display:flex;justify-content:space-between;gap:10px;color:var(--muted);
+font-size:12px;margin-bottom:13px}
+.qtext{font-weight:600;line-height:1.6;margin-bottom:15px}
+.option{display:block;width:100%;text-align:left;padding:12px;
+border:1px solid var(--border);border-radius:8px;background:white;
+margin:8px 0;cursor:pointer;line-height:1.5}
+.option:hover{border-color:var(--primary);background:#eff6ff}
+.option.correct{border-color:var(--green);background:#f0fdf4}
+.option.wrong{border-color:var(--red);background:#fef2f2}
+.explain{display:none;background:#f8fafc;border-left:4px solid var(--primary);
+padding:13px;margin-top:13px;border-radius:5px;line-height:1.6;font-size:14px}
+.explain.show{display:block}
+.tag{font-size:11px;background:#eaf1ff;color:#1d4ed8;
+padding:5px 8px;border-radius:20px}
+.progress{height:8px;background:#e2e8f0;border-radius:20px;overflow:hidden}
+.progress div{height:100%;background:var(--primary);width:0}
+#questionArea{min-height:300px}
+.hidden{display:none!important}
+.footer{color:var(--muted);font-size:12px;text-align:center;margin:25px}
+@media(max-width:750px){
+ .layout{grid-template-columns:1fr}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .sidebar{display:grid;grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<header>
+ <div>
+  <h1>LUYỆN THI PHÂN TÍCH BÁO CÁO TÀI CHÍNH</h1>
+  <p>Ôn tập chứng chỉ chuyên môn chứng khoán – UBCKNN</p>
+ </div>
+ <div>NGÂN HÀNG CÂU HỎI 200 CÂU</div>
+</header>
+
+<div class="container">
+ <div class="stats">
+  <div class="stat"><small>Tổng số câu hiện có</small><strong id="total">0</strong></div>
+  <div class="stat"><small>Đã làm</small><strong id="done">0</strong></div>
+  <div class="stat"><small>Trả lời đúng</small><strong id="right">0</strong></div>
+  <div class="stat"><small>Tỷ lệ chính xác</small><strong id="rate">0%</strong></div>
+ </div>
+
+ <div class="panel" style="margin-bottom:18px">
+  <div style="display:flex;justify-content:space-between;margin-bottom:9px">
+   <b>Tiến độ ôn tập</b><span id="progressText">0%</span>
+  </div>
+  <div class="progress"><div id="progressBar"></div></div>
+ </div>
+
+ <div class="layout">
+  <aside class="panel sidebar">
+   <b>CHẾ ĐỘ HỌC</b>
+   <button class="active" onclick="setMode('all',this)">Tất cả câu hỏi</button>
+   <button onclick="setMode('unanswered',this)">Câu chưa làm</button>
+   <button onclick="setMode('wrong',this)">Câu trả lời sai</button>
+   <button onclick="setMode('bookmarked',this)">Câu đã đánh dấu</button>
+   <button onclick="startExam()">Thi thử 50 câu</button>
+   <button onclick="resetProgress()">Xóa tiến độ</button>
+   <hr style="border:0;border-top:1px solid var(--border);margin:13px 0">
+   <b>CHUYÊN ĐỀ</b>
+   <div id="topicList"></div>
+  </aside>
+
+  <main>
+   <div class="toolbar">
+    <input id="search" placeholder="Tìm nội dung câu hỏi..." oninput="render()">
+    <select id="sort" onchange="render()">
+     <option value="normal">Thứ tự câu hỏi</option>
+     <option value="random">Ngẫu nhiên</option>
+    </select>
+   </div>
+   <div id="examInfo" class="panel hidden" style="margin-bottom:12px"></div>
+   <div id="questionArea"></div>
+   <div style="display:flex;justify-content:space-between;gap:10px">
+    <button class="action" onclick="previousQuestion()">← Câu trước</button>
+    <button class="action primary" onclick="nextQuestion()">Câu tiếp theo →</button>
+   </div>
+  </main>
+ </div>
+ <div class="footer">
+  Tài liệu ôn tập tham khảo, không phải đề thi chính thức của UBCKNN.
+ </div>
+</div>
+
+<script>
+const questions = [
+{ id:1,topic:"Tổng quan",type:"Lý thuyết",
+q:"Mục tiêu quan trọng nhất của phân tích báo cáo tài chính doanh nghiệp là gì?",
+a:["Xác định chính xác giá cổ phiếu ngày mai","Đánh giá tình hình tài chính, kết quả kinh doanh và triển vọng doanh nghiệp","Thay thế hoàn toàn kiểm toán độc lập","Chỉ xác định số thuế phải nộp"],
+c:1,e:"Phân tích BCTC giúp đánh giá sức khỏe tài chính, hiệu quả hoạt động, rủi ro và triển vọng để hỗ trợ quyết định kinh tế."},
+{ id:2,topic:"Tổng quan",type:"Lý thuyết",
+q:"Đối tượng nào thường sử dụng báo cáo tài chính để quyết định cho vay?",
+a:["Ngân hàng và tổ chức tín dụng","Khách hàng mua lẻ","Đối thủ cạnh tranh בלבד","Cơ quan khí tượng"],
+c:0,e:"Ngân hàng phân tích khả năng trả nợ, dòng tiền, đòn bẩy và tài sản bảo đảm trước khi cấp tín dụng."},
+{ id:3,topic:"Tổng quan",type:"Lý thuyết",
+q:"Phương pháp phân tích theo chiều ngang chủ yếu dùng để làm gì?",
+a:["So sánh các khoản mục qua nhiều kỳ","So sánh từng khoản mục với tổng tài sản trong cùng kỳ","Tính thuế thu nhập cá nhân","Xác định giá trị hợp lý của mọi tài sản"],
+c:0,e:"Phân tích chiều ngang xem xét mức tăng giảm tuyệt đối và tương đối của chỉ tiêu qua thời gian."},
+{ id:4,topic:"Tổng quan",type:"Lý thuyết",
+q:"Trong phân tích chiều dọc báo cáo kết quả kinh doanh, doanh thu thuần thường được chọn làm cơ sở 100%.",
+a:["Đúng","Sai","Chỉ đúng với doanh nghiệp ngân hàng","Không thể xác định"],
+c:0,e:"Các khoản mục như giá vốn, chi phí bán hàng, lợi nhuận thường được biểu thị theo tỷ lệ trên doanh thu thuần."},
+{ id:5,topic:"Tổng quan",type:"Lý thuyết",
+q:"Khi so sánh doanh nghiệp cùng ngành, yếu tố nào cần được xem xét trước tiên?",
+a:["Chỉ so sánh tên doanh nghiệp","Sự tương đồng về ngành nghề, quy mô, mô hình kinh doanh và kỳ kế toán","Chỉ so sánh số lượng nhân viên","Chỉ so sánh giá cổ phiếu"],
+c:1,e:"Khả năng so sánh phụ thuộc vào mô hình kinh doanh, quy mô, chính sách kế toán và điều kiện hoạt động."},
+{ id:6,topic:"Tổng quan",type:"Lý thuyết",
+q:"Nguồn thông tin nào nên được sử dụng kết hợp khi phân tích BCTC?",
+a:["Chỉ báo cáo kết quả kinh doanh","BCTC, thuyết minh, báo cáo thường niên, thông tin ngành và dữ liệu thị trường","Chỉ bài đăng mạng xã hội","Chỉ giá cổ phiếu"],
+c:1,e:"Cần kết hợp nhiều nguồn để hiểu bối cảnh, chính sách kế toán, giao dịch bất thường và triển vọng."},
+{ id:7,topic:"Tổng quan",type:"Lý thuyết",
+q:"Phân tích BCTC chỉ cần xem số liệu một năm gần nhất là đủ.",
+a:["Đúng","Sai","Đúng với mọi doanh nghiệp niêm yết","Chỉ đúng khi doanh thu tăng"],
+c:1,e:"Nên phân tích nhiều kỳ để nhận diện xu hướng, tính mùa vụ và biến động bất thường."},
+{ id:8,topic:"Tổng quan",type:"Lý thuyết",
+q:"Hạn chế phổ biến của dữ liệu kế toán lịch sử là gì?",
+a:["Không phản ánh bất kỳ giao dịch nào","Có thể không phản ánh đầy đủ giá trị kinh tế hiện tại và triển vọng tương lai","Luôn chính xác tuyệt đối","Không chịu ảnh hưởng của chính sách kế toán"],
+c:1,e:"Số liệu lịch sử chịu ảnh hưởng của nguyên tắc ghi nhận, ước tính kế toán và biến động giá."},
+{ id:9,topic:"Tổng quan",type:"Lý thuyết",
+q:"Khi doanh nghiệp thay đổi chính sách kế toán, nhà phân tích nên làm gì?",
+a:["Bỏ qua thay đổi","Đánh giá ảnh hưởng và điều chỉnh để đảm bảo tính so sánh nếu có thể","Kết luận doanh nghiệp gian lận ngay","Chỉ xem doanh thu"],
+c:1,e:"Thay đổi chính sách có thể làm số liệu giữa các kỳ không còn so sánh trực tiếp được."},
+{ id:10,topic:"Tổng quan",type:"Lý thuyết",
+q:"Phân tích BCTC có thể hỗ trợ quyết định nào?",
+a:["Cho vay","Đầu tư","Quản trị doanh nghiệp","Tất cả các phương án trên"],
+c:3,e:"Nhà đầu tư, chủ nợ, nhà quản trị và nhiều bên liên quan đều sử dụng kết quả phân tích."},
+
+{ id:11,topic:"Hệ thống BCTC",type:"Lý thuyết",
+q:"Bộ báo cáo tài chính doanh nghiệp thông thường gồm những báo cáo cơ bản nào?",
+a:["Bảng cân đối kế toán, báo cáo kết quả kinh doanh, báo cáo lưu chuyển tiền tệ và thuyết minh BCTC","Chỉ bảng cân đối kế toán","Chỉ báo cáo thuế","Chỉ báo cáo doanh thu"],
+c:0,e:"Bộ BCTC cơ bản gồm bảng cân đối kế toán, báo cáo kết quả hoạt động kinh doanh, báo cáo lưu chuyển tiền tệ và thuyết minh."},
+{ id:12,topic:"Hệ thống BCTC",type:"Lý thuyết",
+q:"Bảng cân đối kế toán phản ánh thông tin tại thời điểm nào?",
+a:["Trong toàn bộ vòng đời doanh nghiệp","Tại một thời điểm nhất định","Chỉ trong tháng đầu năm","Chỉ tại ngày thành lập"],
+c:1,e:"Bảng cân đối kế toán phản ánh tài sản, nợ phải trả và vốn chủ sở hữu tại ngày lập báo cáo."},
+{ id:13,topic:"Hệ thống BCTC",type:"Lý thuyết",
+q:"Phương trình kế toán cơ bản là gì?",
+a:["Tài sản = Nợ phải trả + Vốn chủ sở hữu","Doanh thu = Tài sản + Chi phí","Lợi nhuận = Nợ phải trả - Tài sản","Tiền = Doanh thu - Vốn chủ sở hữu"],
+c:0,e:"Tổng tài sản luôn bằng tổng nguồn vốn, gồm nợ phải trả và vốn chủ sở hữu."},
+{ id:14,topic:"Hệ thống BCTC",type:"Lý thuyết",
+q:"Báo cáo kết quả hoạt động kinh doanh phản ánh nội dung nào?",
+a:["Tình hình tài sản tại ngày cuối năm","Doanh thu, chi phí và kết quả kinh doanh trong một kỳ","Chỉ số dư tiền gửi ngân hàng","Chỉ các khoản nợ dài hạn"],
+c:1,e:"Báo cáo này thể hiện hiệu quả hoạt động trong một khoảng thời gian."},
+{ id:15,topic:"Hệ thống BCTC",type:"Lý thuyết",
+q:"Báo cáo lưu chuyển tiền tệ phân loại dòng tiền thành những hoạt động nào?",
+a:["Kinh doanh, đầu tư và tài chính","Bán hàng, marketing và nhân sự","Tài sản, nợ và vốn","Trong nước và nước ngoài"],
+c:0,e:"Ba nhóm dòng tiền là hoạt động kinh doanh, hoạt động đầu tư và hoạt động tài chính."},
+{ id:16,topic:"Hệ thống BCTC",type:"Lý thuyết",
+q:"Thuyết minh báo cáo tài chính có vai trò gì?",
+a:["Cung cấp thông tin chi tiết, chính sách kế toán và giải thích các khoản mục","Thay thế toàn bộ BCTC","Chỉ liệt kê nhân viên","Chỉ ghi giá cổ phiếu"],
+c:0,e:"Thuyết minh giúp người đọc hiểu rõ chính sách kế toán, số dư, giao dịch và thông tin bổ sung."},
+{ id:17,topic:"Hệ thống BCTC",type:"Lý thuyết",
+q:"Khoản mục tiền và tương đương tiền thường được trình bày ở đâu?",
+a:["Tài sản ngắn hạn trên bảng cân đối kế toán","Vốn chủ sở hữu","Doanh thu thuần","Chi phí quản lý"],
+c:0,e:"Tiền và tương đương tiền thuộc tài sản ngắn hạn."},
+{ id:18,topic:"Hệ thống BCTC",type:"Lý thuyết",
+q:"Khoản phải thu khách hàng thường được phân loại là gì?",
+a:["Tài sản","Nợ phải trả","Vốn chủ sở hữu","Doanh thu chưa thực hiện trong mọi trường hợp"],
+c:0,e:"Phải thu khách hàng là quyền thu tiền từ khách hàng, được ghi nhận trong tài sản."},
+{ id:19,topic:"Hệ thống BCTC",type:"Lý thuyết",
+q:"Hàng tồn kho thường được phân loại vào nhóm nào?",
+a:["Tài sản ngắn hạn","Nợ dài hạn","Vốn góp chủ sở hữu","Doanh thu tài chính"],
+c:0,e:"Hàng tồn kho thường là tài sản ngắn hạn do được dự kiến bán hoặc sử dụng trong chu kỳ kinh doanh."},
+{ id:20,topic:"Hệ thống BCTC",type:"Lý thuyết",
+q:"Chi phí khấu hao tài sản cố định thường ảnh hưởng trực tiếp đến chỉ tiêu nào?",
+a:["Chi phí và lợi nhuận kế toán","Vốn góp cổ đông ngay lập tức","Doanh thu bán hàng","Số lượng cổ phiếu lưu hành"],
+c:0,e:"Khấu hao được ghi nhận vào chi phí theo bộ phận sử dụng, làm giảm lợi nhuận kế toán nhưng không phải dòng tiền chi ra trong kỳ."},
+
+{ id:21,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Doanh nghiệp có tổng tài sản 1.200 tỷ đồng, nợ phải trả 700 tỷ đồng. Vốn chủ sở hữu là bao nhiêu?",
+a:["400 tỷ","500 tỷ","700 tỷ","1.900 tỷ"],
+c:1,e:"Vốn chủ sở hữu = Tổng tài sản - Nợ phải trả = 1.200 - 700 = 500 tỷ đồng."},
+{ id:22,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Tài sản ngắn hạn 900 tỷ, tài sản dài hạn 1.100 tỷ. Tổng tài sản là bao nhiêu?",
+a:["900 tỷ","1.100 tỷ","2.000 tỷ","2.100 tỷ"],
+c:2,e:"Tổng tài sản = 900 + 1.100 = 2.000 tỷ đồng."},
+{ id:23,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Tổng tài sản đầu năm là 800 tỷ, cuối năm 1.000 tỷ. Mức tăng tuyệt đối là bao nhiêu?",
+a:["100 tỷ","150 tỷ","200 tỷ","25 tỷ"],
+c:2,e:"Mức tăng tuyệt đối = 1.000 - 800 = 200 tỷ đồng."},
+{ id:24,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Tổng tài sản tăng từ 800 tỷ lên 1.000 tỷ. Tốc độ tăng trưởng là bao nhiêu?",
+a:["20%","25%","30%","125%"],
+c:1,e:"Tốc độ tăng = (1.000 - 800) / 800 × 100% = 25%."},
+{ id:25,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Tài sản ngắn hạn 600 tỷ, nợ ngắn hạn 400 tỷ. Vốn lưu động ròng là bao nhiêu?",
+a:["100 tỷ","200 tỷ","400 tỷ","1.000 tỷ"],
+c:1,e:"Vốn lưu động ròng = Tài sản ngắn hạn - Nợ ngắn hạn = 200 tỷ đồng."},
+{ id:26,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Vốn lưu động ròng dương thường cho thấy điều gì?",
+a:["Tài sản ngắn hạn lớn hơn nợ ngắn hạn","Nợ ngắn hạn lớn hơn tài sản ngắn hạn","Doanh nghiệp chắc chắn có lãi","Doanh nghiệp không có nợ"],
+c:0,e:"Vốn lưu động ròng dương cho thấy một phần tài sản ngắn hạn được tài trợ bằng nguồn vốn dài hạn; chưa đủ để kết luận doanh nghiệp an toàn."},
+{ id:27,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Khoản dự phòng phải thu khó đòi tăng mạnh có thể phản ánh điều gì?",
+a:["Chất lượng khoản phải thu suy giảm hoặc rủi ro thu hồi tăng","Doanh thu chắc chắn tăng","Tiền mặt tăng","Nợ vay giảm"],
+c:0,e:"Dự phòng tăng có thể cho thấy khách hàng chậm trả hoặc nguy cơ không thu hồi được công nợ."},
+{ id:28,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Khi hàng tồn kho tăng nhanh hơn doanh thu trong thời gian dài, nhà phân tích nên chú ý điều gì?",
+a:["Nguy cơ tồn kho chậm luân chuyển hoặc giảm giá","Doanh nghiệp chắc chắn tăng lợi nhuận","Không cần phân tích thêm","Vốn chủ sở hữu chắc chắn tăng"],
+c:0,e:"Tồn kho tăng bất thường có thể do tiêu thụ chậm, dự trữ quá mức hoặc hàng lỗi thời."},
+{ id:29,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Tổng nợ phải trả 600 tỷ, tổng tài sản 1.000 tỷ. Tỷ lệ nợ trên tổng tài sản là bao nhiêu?",
+a:["40%","50%","60%","66,7%"],
+c:2,e:"Tỷ lệ nợ = 600 / 1.000 × 100% = 60%."},
+{ id:30,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Nợ phải trả 600 tỷ, vốn chủ sở hữu 400 tỷ. Hệ số nợ trên vốn chủ sở hữu là bao nhiêu?",
+a:["0,5 lần","1 lần","1,5 lần","2 lần"],
+c:2,e:"D/E = Nợ phải trả / Vốn chủ sở hữu = 600 / 400 = 1,5 lần."},
+
+{ id:31,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Tài sản dài hạn thường bao gồm khoản mục nào?",
+a:["Tiền mặt","Hàng tồn kho","Tài sản cố định","Phải thu khách hàng ngắn hạn"],
+c:2,e:"Tài sản cố định thường thuộc tài sản dài hạn nếu đáp ứng tiêu chuẩn ghi nhận."},
+{ id:32,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Doanh nghiệp mua máy móc bằng tiền mặt, các yếu tố khác không đổi. Ảnh hưởng ban đầu đến tổng tài sản là gì?",
+a:["Tăng tổng tài sản","Giảm tổng tài sản","Không đổi tổng tài sản","Tăng vốn chủ sở hữu"],
+c:2,e:"Tiền giảm và tài sản cố định tăng cùng giá trị nên tổng tài sản không đổi tại thời điểm giao dịch."},
+{ id:33,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Doanh nghiệp vay ngân hàng ngắn hạn và nhận tiền vào tài khoản. Tác động ban đầu là gì?",
+a:["Tài sản và nợ phải trả cùng tăng","Tài sản giảm, nợ tăng","Vốn chủ sở hữu tăng","Tổng tài sản không đổi"],
+c:0,e:"Tiền tăng đồng thời khoản vay phải trả tăng cùng số tiền vay."},
+{ id:34,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Tài sản ngắn hạn 750 tỷ, nợ ngắn hạn 500 tỷ. Hệ số thanh toán hiện hành là bao nhiêu?",
+a:["0,67 lần","1 lần","1,5 lần","2 lần"],
+c:2,e:"Current ratio = 750 / 500 = 1,5 lần."},
+{ id:35,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Tài sản ngắn hạn 800 tỷ, hàng tồn kho 300 tỷ, nợ ngắn hạn 400 tỷ. Hệ số thanh toán nhanh là bao nhiêu?",
+a:["0,8 lần","1,0 lần","1,25 lần","2,0 lần"],
+c:2,e:"Quick ratio = (800 - 300) / 400 = 1,25 lần."},
+{ id:36,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Tiền và tương đương tiền 100 tỷ, đầu tư tài chính ngắn hạn đủ điều kiện 50 tỷ, nợ ngắn hạn 300 tỷ. Hệ số thanh toán tiền mặt là bao nhiêu?",
+a:["0,25 lần","0,5 lần","1 lần","2 lần"],
+c:1,e:"Cash ratio = (100 + 50) / 300 = 0,5 lần."},
+{ id:37,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Hệ số thanh toán hiện hành cao luôn đồng nghĩa doanh nghiệp có tình hình tài chính tốt.",
+a:["Đúng","Sai","Chỉ đúng với doanh nghiệp sản xuất","Chỉ đúng khi có vay ngân hàng"],
+c:1,e:"Hệ số cao có thể do tồn kho lớn hoặc khoản phải thu khó thu hồi; cần đánh giá chất lượng tài sản ngắn hạn."},
+{ id:38,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Khoản vay dài hạn đến hạn trả trong 12 tháng tới thường được xem xét phân loại thế nào?",
+a:["Nợ ngắn hạn","Vốn chủ sở hữu","Doanh thu","Tài sản cố định"],
+c:0,e:"Phần nợ đến hạn thanh toán trong chu kỳ hoặc 12 tháng thường được phân loại vào nợ ngắn hạn theo quy định áp dụng."},
+{ id:39,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Tài sản thế chấp cho khoản vay có ý nghĩa gì khi phân tích tín dụng?",
+a:["Có thể ảnh hưởng đến mức độ bảo đảm khoản vay và khả năng thu hồi nợ","Luôn làm doanh thu tăng","Không liên quan đến rủi ro tín dụng","Tự động làm nợ phải trả biến mất"],
+c:0,e:"Tài sản bảo đảm có thể giảm tổn thất khi vỡ nợ nhưng không thay thế việc đánh giá dòng tiền trả nợ."},
+{ id:40,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Khi phân tích khoản phải thu, thông tin nào đặc biệt quan trọng?",
+a:["Tuổi nợ, đối tượng khách hàng, dự phòng và giao dịch với bên liên quan","Màu sắc logo công ty","Số lượng phòng họp","Giá thuê văn phòng"],
+c:0,e:"Phân tích tuổi nợ, tập trung khách hàng và dự phòng giúp đánh giá khả năng thu hồi công nợ."},
+
+{ id:41,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Doanh nghiệp có tài sản ngắn hạn 1.200 tỷ và nợ ngắn hạn 800 tỷ. Vốn lưu động ròng bằng bao nhiêu?",
+a:["200 tỷ","300 tỷ","400 tỷ","2.000 tỷ"],
+c:2,e:"Vốn lưu động ròng = 1.200 - 800 = 400 tỷ đồng."},
+{ id:42,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Tổng tài sản 2.500 tỷ, vốn chủ sở hữu 1.000 tỷ. Nợ phải trả là bao nhiêu?",
+a:["1.000 tỷ","1.250 tỷ","1.500 tỷ","3.500 tỷ"],
+c:2,e:"Nợ phải trả = Tổng tài sản - Vốn chủ sở hữu = 1.500 tỷ."},
+{ id:43,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Tài sản ngắn hạn 900 tỷ, trong đó hàng tồn kho 360 tỷ; nợ ngắn hạn 600 tỷ. Hệ số thanh toán nhanh là bao nhiêu?",
+a:["0,6 lần","0,9 lần","1,0 lần","1,5 lần"],
+c:1,e:"Quick ratio = (900 - 360) / 600 = 0,9 lần."},
+{ id:44,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Nợ phải trả 900 tỷ, vốn chủ sở hữu 600 tỷ. Tỷ lệ nợ trên vốn chủ sở hữu là bao nhiêu?",
+a:["0,67 lần","1 lần","1,5 lần","2 lần"],
+c:2,e:"D/E = 900 / 600 = 1,5 lần."},
+{ id:45,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Doanh nghiệp có vốn lưu động ròng âm có thể gặp rủi ro nào?",
+a:["Áp lực thanh toán ngắn hạn","Không thể có doanh thu","Không thể có lợi nhuận","Không thể huy động vốn"],
+c:0,e:"Nợ ngắn hạn lớn hơn tài sản ngắn hạn có thể gây áp lực thanh khoản, nhưng cần xem xét đặc điểm ngành và chu kỳ tiền."},
+{ id:46,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Khi tài sản tăng nhưng doanh thu không tăng tương ứng, nhà phân tích nên xem xét điều gì?",
+a:["Hiệu quả sử dụng tài sản","Chỉ số lượng nhân viên","Chỉ cổ tức","Không cần xem xét"],
+c:0,e:"Tài sản tăng mà doanh thu không tăng có thể làm giảm vòng quay tài sản và hiệu quả sử dụng vốn."},
+{ id:47,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Một khoản phải thu lớn phát sinh từ giao dịch với bên liên quan cần được đánh giá thế nào?",
+a:["Đánh giá điều kiện giao dịch, khả năng thu hồi và tính minh bạch","Mặc nhiên xem là tiền mặt","Bỏ qua vì là bên liên quan","Tự động xóa khỏi tài sản"],
+c:0,e:"Giao dịch bên liên quan có thể phát sinh rủi ro về điều kiện thương mại, thu hồi và minh bạch."},
+{ id:48,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Khi so sánh tỷ trọng hàng tồn kho giữa các doanh nghiệp, cần lưu ý điều gì?",
+a:["Đặc thù ngành và mô hình kinh doanh","Chỉ tên doanh nghiệp","Chỉ số lượng cổ đông","Chỉ giá cổ phiếu"],
+c:0,e:"Mức tồn kho hợp lý khác nhau đáng kể giữa bán lẻ, sản xuất, xây dựng và dịch vụ."},
+{ id:49,topic:"Bảng cân đối kế toán",type:"Tính toán",
+q:"Tổng tài sản cuối kỳ 1.500 tỷ, đầu kỳ 1.200 tỷ. Tốc độ tăng tổng tài sản là bao nhiêu?",
+a:["15%","20%","25%","30%"],
+c:2,e:"(1.500 - 1.200) / 1.200 × 100% = 25%."},
+{ id:50,topic:"Bảng cân đối kế toán",type:"Lý thuyết",
+q:"Kết luận nào đúng khi phân tích bảng cân đối kế toán?",
+a:["Chỉ cần nhìn tổng tài sản","Cần xem cơ cấu tài sản, nguồn vốn, kỳ hạn và chất lượng tài sản","Chỉ cần nhìn vốn điều lệ","Không cần đối chiếu thuyết minh"],
+c:1,e:"Phân tích cần xem cơ cấu và chất lượng tài sản, nghĩa vụ nợ, khả năng thanh toán và thuyết minh liên quan."}
+];
+
+let mode="all",topic="Tất cả",current=0,exam=false,examQuestions=[];
+let answers=JSON.parse(localStorage.getItem("bctc_answers")||"{}");
+let bookmarks=JSON.parse(localStorage.getItem("bctc_bookmarks")||"[]");
+
+function save(){
+ localStorage.setItem("bctc_answers",JSON.stringify(answers));
+ localStorage.setItem("bctc_bookmarks",JSON.stringify(bookmarks));
+ updateStats();
+}
+function updateStats(){
+ const done=Object.keys(answers).length;
+ const right=Object.values(answers).filter(x=>x.correct).length;
+ document.getElementById("total").textContent=questions.length;
+ document.getElementById("done").textContent=done;
+ document.getElementById("right").textContent=right;
+ document.getElementById("rate").textContent=done?Math.round(right/done*100)+"%":"0%";
+ const p=questions.length?Math.round(done/questions.length*100):0;
+ document.getElementById("progressText").textContent=p+"%";
+ document.getElementById("progressBar").style.width=p+"%";
+}
+function getFiltered(){
+ let list=exam?examQuestions:questions;
+ if(!exam){
+  if(topic!=="Tất cả")list=list.filter(q=>q.topic===topic);
+  if(mode==="unanswered")list=list.filter(q=>!answers[q.id]);
+  if(mode==="wrong")list=list.filter(q=>answers[q.id]&&!answers[q.id].correct);
+  if(mode==="bookmarked")list=list.filter(q=>bookmarks.includes(q.id));
+ }
+ const s=document.getElementById("search").value.toLowerCase();
+ if(s)list=list.filter(q=>q.q.toLowerCase().includes(s));
+ if(document.getElementById("sort").value==="random"&&!exam)list=[...list].sort(()=>Math.random()-.5);
+ return list;
+}
+function renderTopics(){
+ const topics=["Tất cả",...new Set(questions.map(q=>q.topic))];
+ document.getElementById("topicList").innerHTML=topics.map(t=>
+ `<button class="${topic===t?'active':''}" onclick="setTopic('${t}')">${t}</button>`
+ ).join("");
+}
+function setTopic(t){topic=t;mode="all";exam=false;current=0;renderTopics();render()}
+function setMode(m,el){
+ mode=m;topic="Tất cả";exam=false;current=0;
+ document.querySelectorAll(".sidebar button").forEach(b=>b.classList.remove("active"));
+ el.classList.add("active");renderTopics();render();
+}
+function render(){
+ const list=getFiltered();
+ if(current>=list.length)current=0;
+ const area=document.getElementById("questionArea");
+ if(!list.length){area.innerHTML="<div class='panel'>Không có câu hỏi phù hợp.</div>";return}
+ const q=list[current];
+ const saved=answers[q.id];
+ area.innerHTML=`
+ <div class="question">
+  <div class="qtop">
+   <span>Câu ${q.id} / ${questions.length} · ${q.topic}</span>
+   <span class="tag">${q.type}</span>
+  </div>
+  <div class="qtext">${q.q}</div>
+  ${q.a.map((a,i)=>`
+   <button class="option ${saved?(i===q.c?'correct':(i===saved.choice?'wrong':'')):''}"
+    onclick="choose(${q.id},${i})" ${saved?'disabled':''}>
+    ${String.fromCharCode(65+i)}. ${a}
+   </button>`).join("")}
+  <div class="explain ${saved?'show':''}" id="explain">
+   <b>${saved?(saved.correct?'Chính xác!':'Chưa chính xác!'):'Giải thích'}</b><br>
+   Đáp án: <b>${String.fromCharCode(65+q.c)}</b>. ${q.a[q.c]}<br>
+   ${q.e}
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+   <button class="action" onclick="toggleBookmark(${q.id})">
+    ${bookmarks.includes(q.id)?'★ Đã đánh dấu':'☆ Đánh dấu'}
+   </button>
+   <button class="action" onclick="showAnswer(${q.id})">Xem đáp án</button>
+  </div>
+ </div>
+ <div style="color:var(--muted);font-size:13px;text-align:center">
+  ${current+1} / ${list.length} câu trong danh sách hiện tại
+ </div>`;
+ document.getElementById("examInfo").classList.toggle("hidden",!exam);
+ if(exam)document.getElementById("examInfo").innerHTML=
+ `<b>Chế độ thi thử:</b> ${current+1}/${examQuestions.length} câu. Chọn đáp án để ghi nhận kết quả.`;
+}
+function choose(id,i){
+ const q=questions.find(x=>x.id===id);
+ if(answers[id])return;
+ answers[id]={choice:i,correct:i===q.c};
+ save();render();
+}
+function showAnswer(id){
+ const q=questions.find(x=>x.id===id);
+ const box=document.getElementById("explain");
+ box.classList.add("show");
+ box.innerHTML=`<b>Đáp án: ${String.fromCharCode(65+q.c)}. ${q.a[q.c]}</b><br>${q.e}`;
+}
+function toggleBookmark(id){
+ bookmarks=bookmarks.includes(id)?bookmarks.filter(x=>x!==id):[...bookmarks,id];
+ save();render();
+}
+function nextQuestion(){
+ const list=getFiltered();if(current<list.length-1)current++;render();
+}
+function previousQuestion(){if(current>0)current--;render()}
+function startExam(){
+ exam=true;mode="all";topic="Tất cả";current=0;
+ examQuestions=[...questions].sort(()=>Math.random()-.5).slice(0,Math.min(50,questions.length));
+ renderTopics();render();
+}
+function resetProgress(){
+ if(confirm("Bạn có chắc muốn xóa toàn bộ lịch sử làm bài?")){
+  answers={};bookmarks=[];save();render();
+ }
+}
+renderTopics();updateStats();render();
+</script>
+</body>
+</html>
