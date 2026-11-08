@@ -737,6 +737,10 @@ const questions = [
   e: "Bước 1: Lợi nhuận gộp = 2.400 - 1.680 = 720 tỷ. Bước 2: Lợi nhuận trước thuế = 720 - 180 - 120 - 60 = 360 tỷ. Bước 3: LNST = 360 - 72 = 288 tỷ. Bước 4: ROA = 288 / 1.800 × 100% = 16%. Bước 5: ROE = 288 / 900 × 100% = 32%. Đáp án A. Bài này kết hợp báo cáo kết quả kinh doanh với bảng cân đối kế toán để tính khả năng sinh lời."
 }
 ];
+// FIX: TỰ ĐỘNG ĐÁNH ID RIÊNG CHO TỪNG CÂU HỎI
+questions.forEach((q, index) => {
+    q.id = index + 1;
+});
 
 let mode="all",topic="Tất cả",current=0,exam=false,examQuestions=[];
 let answers=JSON.parse(localStorage.getItem("bctc_answers")||"{}");
